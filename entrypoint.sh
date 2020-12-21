@@ -41,6 +41,23 @@ else
     && ln -s /data/package.json /usr/src/app/package.json
 fi
 
+if [ -e /data/plugins ]; then
+    # iterate through the /data/plugins folder and ln them to /usr/src/app/node_modules
+    for dir in /data/plugins/*/
+    do
+        dir=${dir%*/}
+        ln -s /data/plugins/${dir##*/} /usr/src/app/node_modules/${dir##*/}
+    done
+fi
+
+if [ -e /data/scripts ]; then
+    # iterate through the /data/scripts folder and execute any extra scripts
+    for file in /data/scripts/*.sh
+    do
+        sh $file
+    done
+fi
+
 if [ -f config.json ]; then
     /usr/src/app/nodebb build --series
     /usr/src/app/nodebb upgrade -mips
