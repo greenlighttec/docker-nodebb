@@ -46,6 +46,7 @@ if [ -e /data/plugins ]; then
     for dir in /data/plugins/*/
     do
         dir=${dir%*/}
+        echo 'Linking /data/plugins/${dir##*/} to /usr/src/app/node_modules/${dir##*/'
         ln -s /data/plugins/${dir##*/} /usr/src/app/node_modules/${dir##*/}
     done
 fi
@@ -54,6 +55,7 @@ if [ -e /data/scripts ]; then
     # iterate through the /data/scripts folder and execute any extra scripts
     for file in /data/scripts/*.sh
     do
+        echo 'Running script $file ..'
         sh $file
     done
 fi
