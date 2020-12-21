@@ -46,7 +46,7 @@ if [ -e /data/plugins ]; then
     for dir in /data/plugins/*/
     do
         dir=${dir%*/}
-        echo 'Linking /data/plugins/${dir##*/} to /usr/src/app/node_modules/${dir##*/'
+        echo Linking /data/plugins/${dir##*/} to /usr/src/app/node_modules/${dir##*/}
         ln -s /data/plugins/${dir##*/} /usr/src/app/node_modules/${dir##*/}
     done
 fi
@@ -62,7 +62,11 @@ fi
 
 if [ -f config.json ]; then
     /usr/src/app/nodebb build --series
-    /usr/src/app/nodebb upgrade -mips
+    if [ "$SKIP_UPGRADE" == "true" ]; then
+        echo "Skipping automatic upgrades.."
+    else
+        /usr/src/app/nodebb upgrade -mips
+    fi
 fi
 
 exec "$@"
