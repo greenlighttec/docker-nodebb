@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:19
 
 LABEL org.opencontainers.image.source https://github.com/rez0n/docker-nodebb
 
