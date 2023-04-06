@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.source https://github.com/rez0n/docker-nodebb
 ENV NODE_ENV=production \
     daemon=false \
     silent=false
-ARG RELEASE
+ARG RELEASE="v2.8.10"
 
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /data
